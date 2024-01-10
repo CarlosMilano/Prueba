@@ -4,7 +4,6 @@ import Chat from './components/Chat.vue';
 import Contact from './components/Contact.vue';
 import ChatMenu from './components/ChatMenu.vue';
 import Abierto from './components/Abierto.vue';
-import Message from './components/Message.vue';
 </script>
 
 <template>
@@ -19,7 +18,6 @@ import Message from './components/Message.vue';
         <section class="chat-area">
             <ChatMenu/>
             <Abierto/>
-            <Message/>
         </section>
     </div>
 </template>
@@ -40,12 +38,15 @@ import Message from './components/Message.vue';
     flex-direction: column;
     padding: 15px;
     grid-area: menu;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ccc;
 }
 
 .chat-area{
     grid-area: chat;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
 }
 
 h1{

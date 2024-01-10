@@ -1,90 +1,103 @@
-<script >
+<script>
 export default {
     data() {
         return {
-            message1: "Este es un mensaje que mande a alguien",
-            message2: "Este es un mensaje que me mando alguien",
+            messages: [],
+            newMessage: ''
         };
+    },
+    methods: {
+        sendMessage() {
+            if (this.newMessage.trim() !== '') {
+                this.messages.push(this.newMessage);
+                this.newMessage = '';
+            }
+        }
     }
 };
 </script>
 
 <template>
-    <div class="chat-abierto">
-        <article class="message-r">
-                <p class="message-description-send">{{ message1 }}</p>
-                <img src="/images/prueba.png" alt="Imagen prueba">
-            </article>
-        <article class="message">
-            <img src="/images/prueba.png" alt="Imagen prueba">
-                <p class="message-description-r">{{ message2 }}</p>
-        </article>
-        <article class="message-r">
-                    <p class="message-description-send">{{ message1 }}</p>
+    <div class="area">
+            <div class="message-area" v-for="(message, index) in messages" :key="index">
+                    <p class="message">{{ message }}</p>
                     <img src="/images/prueba.png" alt="Imagen prueba">
-                </article>
-            <article class="message">
-                <img src="/images/prueba.png" alt="Imagen prueba">
-                    <p class="message-description-r">{{ message2 }}</p>
-            </article>
-            <article class="message-r">
-                        <p class="message-description-send">{{ message1 }}</p>
-                        <img src="/images/prueba.png" alt="Imagen prueba">
-                    </article>
-                <article class="message">
-                    <img src="/images/prueba.png" alt="Imagen prueba">
-                        <p class="message-description-r">{{ message2 }}</p>
-                </article>
+            </div>
+        <div class="text-area">
+            <input class="text-box" v-model="newMessage" placeholder="Type your message..." />
+            <button @click="sendMessage">Send</button>
+        </div>
     </div>
 </template>
 
-
 <style scoped>
 
-.chat-abierto{
-    padding: 25px;
-}
-
-.message{
+.message-area {
     display: flex;
+    right: 10px;
+    margin: 10px;
+    flex-direction: row;
     align-items: center;
-    gap: 15px;
+    justify-content: flex-end;
 }
 
-.message img{
-    height: 60px;
-    width: 60px;
-    border-radius: 100%;
-}
-
-.message-r{
+.message {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 15px;
-    justify-content: end;
-}
-
-.message-r img{
-    height: 60px;
-    width: 60px;
-    border-radius: 100%;
-}
-
-.message-description-send{
+    border-radius: 5px;
     padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: blueviolet;
     color: white;
-    border-radius: 8px;
+}
+
+.message-area img {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    margin-left: 10px;
+}
+.text-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+}
+.area {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.text-box {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.message-description-r{
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+button {
+    position: absolute;
+    border-radius: 5px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 13px;
+    right: 10px;
 }
 
 * {
     margin: 0;
     padding: 0;
-}</style>
+}
+</style>
